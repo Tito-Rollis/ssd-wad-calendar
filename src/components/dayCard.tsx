@@ -16,7 +16,7 @@ export const DayCardComponent = () => {
 
     const year = new Date().getFullYear();
     const month = new Date().getMonth();
-    // const currentDay = new Date().getDay();
+    const currentDay = new Date().getDay();
     const firstDayInMonth = new Date(year, month, 1).getDay(); // <0-6>
     const lastDayInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -66,7 +66,9 @@ export const DayCardComponent = () => {
                 return (
                     <div
                         key={index}
-                        className="w-full border p-2 h-full min-h-24 bg-blue-500 flex flex-col justify-self-stretch gap-y-2"
+                        className={`w-full border p-2 h-full min-h-24 ${
+                            currentDay !== day ? 'bg-blue-400 ' : 'bg-blue-500'
+                        }  flex flex-col justify-self-stretch gap-y-2`}
                     >
                         {/* Header */}
                         <div className="flex justify-between items-center">
