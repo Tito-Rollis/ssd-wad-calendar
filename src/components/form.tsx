@@ -19,12 +19,10 @@ export const FormComponent = (props: FormComponentProps) => {
     const [timeInputValue, setTimeInputValue] = useState<string>('');
 
     const previousValueInput = () =>
-        // console.log("JALAN LG")
         eventList.map((event, index) => {
             if (index === date) {
                 setNameInputValue(formType === 'edit' ? event.name : '');
                 setInviteeInputValue(formType === 'edit' ? event.invitee : '');
-                // setTimeInputValue(formType === 'edit' ? event.time.replace(/pm|am/gi, '').trim() : '');
             }
         });
     const handleNameChange = () => {
@@ -59,11 +57,12 @@ export const FormComponent = (props: FormComponentProps) => {
             date,
             color: props.color,
         };
+
+        // Conditional Render Form Component based on formType
         if (formType === 'add') {
             setEventList((prev) => [...prev, formInput]);
         } else if (formType === 'edit') {
             const updatedEvent: FormData[] = eventList.map((event, index) => {
-                console.log(index === date);
                 if (index === date) {
                     return { ...event, name: nameInputValue, invitee: inviteeInputValue, time: timeInputValue };
                 } else {

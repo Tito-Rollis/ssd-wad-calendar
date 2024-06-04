@@ -25,7 +25,17 @@ export const DayCardComponent = () => {
         return data.length;
     };
 
-    const generateRandomColor = () => Math.floor(Math.random() * (lastDayInMonth * 3 + 1));
+    const getRandomColor = () => {
+        const existingColor = Math.floor(Math.random() * (lastDayInMonth * 3 + 1));
+
+        eventList.map((color) => {
+            // If there is the same color, then generate random color again
+            do {
+                existingColor;
+            } while (parseInt(color.color) === existingColor);
+        });
+        return existingColor;
+    };
 
     const handleAddEvent = (date: number) => {
         setFormType('add');
@@ -56,7 +66,7 @@ export const DayCardComponent = () => {
 
     return (
         <>
-            {openModal && <ModalDialog color={generateRandomColor().toString()} />}
+            {openModal && <ModalDialog color={getRandomColor().toString()} />}
 
             {/* Render The Day Box based on daysInMonth  */}
             {daysInMonth().map((day, index) => {
